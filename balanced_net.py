@@ -111,18 +111,15 @@ connectionPE.connect(p=.05)
 eqs_tripletrule = '''w : 1
 dApre/dt = -Apre / tau_stdp : 1 (event-driven)
 dApost/dt = -Apost / tau_stdp : 1 (event-driven)
-dApre2/dt = -Apre2 / tau_stdp_slow : 1 (event-driven)
 dApost2/dt = -Apost2 / tau_stdp_slow : 1 (event-driven)'''
 
 on_pre_triplet='''
 Apre += dApre
-Apre2before = Apre2
 w = clip(w + eta * An * Apost, 0, gmax)
-Apre2 += dApre2
-ge += wEE_initial*nS'''
+ge += w*nS'''
 on_post_triplet='''
 Apost += dApost
-Apost2before = dApost2
+Apost2before = Apost2
 w = clip(w + eta * Ap * Apre * Apost2before, 0, gmax)
 Apost2 += dApost2'''
 
